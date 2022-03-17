@@ -1,43 +1,54 @@
 
 #include "vector.h"
 
-#include <exception>
 
-
-template <class TElem> 
-Vector <TElem>::Vector(int capacity)
+template <typename TElem>
+DynamicVector <TElem>::DynamicVector(int capacity) : size{0}, capacity{capacity}
 {
-	this->capacity = capacity;
-	if (capacity < 1)
-		throw "Invalid capacity!\n";
-	
-	this->size = 0;
-	this->data = new void* [this->capacity];
+	this->data = new TElem[this->capacity];
 }
 
-template <class TElem> 
-Vector<TElem>::Vector(Vector& vector)
+template<typename TElem>
+DynamicVector<TElem>::DynamicVector(const DynamicVector& vector)
 {
-	//TODO: create implementation for copy constructor
+	this->size = vector.size;
+	this->capacity = vector.capacity;
+	this->data = new TElem[vector.capacity];
+
+	for (int i = 0; i < vector.size; i++)
+		this->data[i] = vector.data[i];
 }
 
-template <class TElem> 
-Vector<TElem>::~Vector()
+template <typename TElem> 
+DynamicVector <TElem>::~DynamicVector()
 {
 	delete[] this->data;
 }
 
-template <class TElem> 
-TElem Vector<TElem>::get(int position)
+template<typename TElem>
+void DynamicVector<TElem>::resize()
 {
-	if (position < 0 || position > this->size)
-		throw "Index out of range!\n";
+	this->capacity *= 2;
+	TElem* newData = new TElem[this->capacity];
+
+	for (int i = 0; i < this->size; i++)
+		newData[i] = this->data[i];
+
+	delete[] this->data;
+	this->data = newData;
+}
+
+template<typename TElem>
+TElem DynamicVector<TElem>::getElemet(int position) const
+{
+	if (position < 0 || position > this->size - 1)
+		throw "Index out of bounds!\n";
 
 	return this->data[position];
 }
 
-template <class TElem> 
-void Vector<TElem>::add(TElem element)
+template<typename TElem>
+void DynamicVector<TElem>::add(TElem element)
 {
 	if (this->size == this->capacity)
 		this->resize();
@@ -45,28 +56,37 @@ void Vector<TElem>::add(TElem element)
 	this->data[this->size++] = element;
 }
 
-template <class TElem>
-void Vector<TElem>::remove(int position)
+template<typename TElem>
+void DynamicVector<TElem>::remove(int position)
 {
-	if (position < 0 || position > this->size)
-		throw "Index out of range!\n";
+	if (position < 0 || position > this->size - 1)
+		throw "Index out of bounds!\n";
 
-	//delete this->data[position];
-
-	while (position < this->size - 1)
-		this->data[position] = this->data[++position];
-	
-	this->size--;
+	for (int i = position; i < this->size - 1; i++)
+		this->data[i] = this->data[i + 1];
 }
 
-template <class TElem> 
-void Vector<TElem>::update(int position, TElem element)
+template<typename TElem>
+DynamicVector<TElem>& DynamicVector<TElem>::operator=(const DynamicVector& vector)
 {
+	this->size = vector.size;
+	this->capacity = vector.capacity;
+	delete[] this->data;
+	TElem* newData = new TElem[vector.capacity];
 
+	for (int i = 0; i < vector.size; i++)
+		newData[i] = vector.data[i];
+
+	this->data = newData;
+
+	return *this;
 }
 
-template <class TElem> 
-void Vector<TElem>::resize()
+template<typename TElem>
+TElem DynamicVector<TElem>::operator[](int position) const
 {
-	
+	if (position < 0 || position > this->size - 1)
+		throw "Index out of bounds!\n";
+
+	return this->data[position];
 }

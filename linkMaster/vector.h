@@ -1,24 +1,25 @@
 #pragma once
 
-template <class TElem>
-class Vector
+template <typename TElem> class DynamicVector
 {
+private:
+	int size;
+	int capacity;
+	TElem data;
+
+	void resize();
 public:
-	Vector(int capacity=2);
-	Vector(Vector& vector);
-	~Vector();
+	DynamicVector(int capacity=1);
+	DynamicVector(const DynamicVector& vector);
+	~DynamicVector();
 
-
-	TElem get(int position);
+	inline int getSize() const { return this->size; }
+	TElem getElemet(int position) const;
 
 	void add(TElem element);
 	void remove(int position);
-	void update(int position, TElem element);
 
-private:
-	TElem* data;
-	int capacity;
-	int size;
-
-	void resize();
+	DynamicVector& operator=(const DynamicVector& vector);
+	TElem operator[](int position) const;
 };
+
