@@ -1,5 +1,7 @@
 #pragma once
 
+#include <exception>
+
 template <typename TElem> class DynamicVector
 {
 private:
@@ -14,7 +16,7 @@ public:
 	~DynamicVector();
 
 	inline int getSize() const { return this->size; }
-	TElem getElemet(int position) const;
+	TElem getElement(int position) const;
 
 	void add(TElem element);
 	void remove(int position);
@@ -37,7 +39,7 @@ DynamicVector<TElem>::DynamicVector(const DynamicVector& vector)
 	this->capacity = vector.capacity;
 	this->data = new TElem[vector.capacity];
 
-	for (int i = 0; i < this->size; i++)
+	for (int i = 0; i < vector.size; i++)
 		this->data[i] = vector.data[i];
 }
 
@@ -61,10 +63,10 @@ void DynamicVector<TElem>::resize()
 }
 
 template<typename TElem>
-TElem DynamicVector<TElem>::getElemet(int position) const
+TElem DynamicVector<TElem>::getElement(int position) const
 {
 	if (position < 0 || position > this->size - 1)
-		throw "Index out of bounds!\n";
+		throw std::exception("Index out of bounds!\n");
 
 	return this->data[position];
 }
@@ -82,10 +84,12 @@ template<typename TElem>
 void DynamicVector<TElem>::remove(int position)
 {
 	if (position < 0 || position > this->size - 1)
-		throw "Index out of bounds!\n";
+		throw std::exception("Index out of bounds!\n");
 
 	for (int i = position; i < this->size - 1; i++)
 		this->data[i] = this->data[i + 1];
+
+	this->size--;
 }
 
 template<typename TElem>
@@ -108,7 +112,7 @@ template<typename TElem>
 TElem DynamicVector<TElem>::operator[](int position) const
 {
 	if (position < 0 || position > this->size - 1)
-		throw "Index out of bounds!\n";
+		throw std::exception("Index out of bounds!\n");
 
 	return this->data[position];
 }

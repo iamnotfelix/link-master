@@ -1,6 +1,15 @@
+
+#include "tests.h"
+
 #include <iostream>
+#include <crtdbg.h>
+
 
 int main()
 {
-	std::cout << "Hello world";
+	testVector();
+
+	_CrtDumpMemoryLeaks();
+
+	int x = getchar();
 }
