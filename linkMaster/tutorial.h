@@ -5,14 +5,17 @@
 class Tutorial
 {
 private:
+	const unsigned int id;
 	std::string title;
 	std::string presenter;
 	int duration;
 	int likes;
 	std::string link;
+	static unsigned int idCount;
 public:
 	Tutorial(std::string title, std::string presenter, int duration, int likes, std::string link);
 	
+	inline const unsigned int getId() const { return this->id; }
 	inline std::string getTitle() const { return this->title; }
 	inline std::string getPresenter() const { return this->presenter; }
 	inline int getDuration() const { return this->duration; }
