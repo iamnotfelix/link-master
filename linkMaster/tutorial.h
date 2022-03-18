@@ -5,7 +5,7 @@
 class Tutorial
 {
 private:
-	const unsigned int id;
+	unsigned int id;
 	std::string title;
 	std::string presenter;
 	int duration;
@@ -13,7 +13,7 @@ private:
 	std::string link;
 	static unsigned int idCount;
 public:
-	Tutorial(std::string title, std::string presenter, int duration, int likes, std::string link);
+	Tutorial(std::string title="", std::string presenter="", int duration=0, int likes=0, std::string link="");
 	
 	inline const unsigned int getId() const { return this->id; }
 	inline std::string getTitle() const { return this->title; }
@@ -27,4 +27,6 @@ public:
 	inline void setDuration(const int newDuration) { this->duration = newDuration; }
 	inline void setLikes(const int newLikes) { this->likes = newLikes; }
 	inline void setLink(const std::string newLink) { this->link = newLink; }
+
+	bool operator==(const Tutorial& tutorial);
 };

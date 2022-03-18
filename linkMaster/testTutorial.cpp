@@ -25,11 +25,24 @@ namespace TutorialTests
 
 		std::cout << "Getters tests: success\n";
 	}
+
+	void testOperatorEqualEqual()
+	{
+		Tutorial tutorial1{ "title1", "presenter1", 12, 100, "link1" };
+		Tutorial tutorial2{ "title1", "presenter1", 12, 100, "link1" };
+		Tutorial tutorial3{ "title1", "presenter1", 12, 100, "link2" };
+
+		assert(tutorial1 == tutorial2);
+		assert(!(tutorial1 == tutorial3));
+
+		std::cout << "Operator '==' tests: success\n";
+	}
 }
 
 void testTutorial()
 {
 	std::cout << "Tutorial tests:\n"; 
 	TutorialTests::testGetters();
+	TutorialTests::testOperatorEqualEqual();
 	std::cout << std::endl;
 }
