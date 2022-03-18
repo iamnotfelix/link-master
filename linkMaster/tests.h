@@ -2,3 +2,4 @@
 
 
 void testVector();
+void testTutorial();
