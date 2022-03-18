@@ -9,6 +9,7 @@ int main()
 {
 	testVector();
 	testTutorial();
+	testRepository();
 
 	_CrtDumpMemoryLeaks();
 
