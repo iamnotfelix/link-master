@@ -56,31 +56,46 @@ void UI::getInput(std::string& title, std::string& presenter, int& duration, int
 	std::cout << "Presenter: ";
 	std::cin >> presenter;
 
-	std::cout << "Minutes: ";
-	while (!(std::cin >> minutes))
+	while (true)
 	{
-		std::cin.clear();
-		std::cin.ignore(100000, '\n');
-		std::cout << "Enter a number!" << std::endl;
 		std::cout << "Minutes: ";
+		while (!(std::cin >> minutes))
+		{
+			std::cin.clear();
+			std::cin.ignore(100000, '\n');
+			std::cout << "Enter a number!" << std::endl;
+			std::cout << "Minutes: ";
+		}
+		if (minutes >= 0) break;
+		std::cout << "Enter a positive value!" << std::endl;
 	}
 
-	std::cout << "Seconds: ";
-	while (!(std::cin >> seconds))
+	while (true)
 	{
-		std::cin.clear();
-		std::cin.ignore(100000, '\n');
-		std::cout << "Enter a number!" << std::endl;
 		std::cout << "Seconds: ";
+		while (!(std::cin >> seconds))
+		{
+			std::cin.clear();
+			std::cin.ignore(100000, '\n');
+			std::cout << "Enter a number!" << std::endl;
+			std::cout << "Seconds: ";
+		}
+		if (seconds >= 0) break;
+		std::cout << "Enter a positive value!" << std::endl;
 	}
 
-	std::cout << "Likes: ";
-	while (!(std::cin >> likes))
+	while (true)
 	{
-		std::cin.clear();
-		std::cin.ignore(100000, '\n');
-		std::cout << "Enter a number!" << std::endl;
 		std::cout << "Likes: ";
+		while (!(std::cin >> likes))
+		{
+			std::cin.clear();
+			std::cin.ignore(100000, '\n');
+			std::cout << "Enter a number!" << std::endl;
+			std::cout << "Likes: ";
+		}
+		if (likes >= 0) break;
+		std::cout << "Enter a positive value!" << std::endl;
 	}
 
 	std::cout << "Link: ";
@@ -105,14 +120,19 @@ void UI::addHandler()
 void UI::deleteHandler()
 {
 	int id = 0;
-	std::cout << "ID: ";
 
-	while (!(std::cin >> id))
+	while (true)
 	{
-		std::cin.clear();
-		std::cin.ignore(100000, '\n');
-		std::cout << "Enter a number!" << std::endl;
 		std::cout << "ID: ";
+		while (!(std::cin >> id))
+		{
+			std::cin.clear();
+			std::cin.ignore(100000, '\n');
+			std::cout << "Enter a number!" << std::endl;
+			std::cout << "ID: ";
+		}
+		if (id >= 0) break;
+		std::cout << "Enter a positive value!" << std::endl;
 	}
 
 	this->services.remove(id);
@@ -124,14 +144,19 @@ void UI::deleteHandler()
 void UI::updateHandler()
 {
 	int id = 0;
-	std::cout << "ID: ";
 
-	while (!(std::cin >> id))
+	while (true)
 	{
-		std::cin.clear();
-		std::cin.ignore(100000, '\n');
-		std::cout << "Enter a number!" << std::endl;
 		std::cout << "ID: ";
+		while (!(std::cin >> id))
+		{
+			std::cin.clear();
+			std::cin.ignore(100000, '\n');
+			std::cout << "Enter a number!" << std::endl;
+			std::cout << "ID: ";
+		}
+		if (id >= 0) break;
+		std::cout << "Enter a positive value!" << std::endl;
 	}
 
 	std::string title, presenter, link;
