@@ -27,7 +27,7 @@ namespace RepositoryTests
 		assert(repo.find(tutorial1) == true);
 		assert(repo.find(tutorial4) == true);
 
-		std::cout << "Find tests: success\n";
+		std::cout << "\tFind tests\n";
 	}
 
 	void testGetElement()
@@ -54,7 +54,7 @@ namespace RepositoryTests
 			assert(strcmp(e.what(), "Tutorial not found!\n") == 0);
 		}
 
-		std::cout << "Get element test: success\n";
+		std::cout << "\tGet element test\n";
 	}
 	
 	void testGetAll()
@@ -75,7 +75,7 @@ namespace RepositoryTests
 			assert(data.getElement(i) == repo.getElement(data.getElement(i).getId()));
 		}
 
-		std::cout << "Get all tests: success\n";
+		std::cout << "\tGet all tests\n";
 	}
 
 	void testAdd()
@@ -105,7 +105,7 @@ namespace RepositoryTests
 			assert(strcmp(e.what(), "Tutorial already exists!\n") == 0);
 		}
 
-		std::cout << "Add tests: success\n";
+		std::cout << "\tAdd tests\n";
 	}
 	
 	void testRemove()
@@ -135,7 +135,7 @@ namespace RepositoryTests
 			assert(strcmp(e.what(), "Tutorial not found!\n") == 0);
 		}
 
-		std::cout << "Remove tests: success\n";
+		std::cout << "\tRemove tests\n";
 	}
 
 	void testUpdate()
@@ -164,7 +164,7 @@ namespace RepositoryTests
 		repo.update(tutorial2.getId(), tutorial3);
 		assert(repo.find(tutorial3) == true);
 
-		std::cout << "Update tests: success\n";
+		std::cout << "\tUpdate tests\n";
 	}
 }
 
