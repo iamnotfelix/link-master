@@ -23,5 +23,3 @@ int main()
 
 	int x = getchar();
 }
-
-//TODO: add 'left unchanged' feature to update functionality(add to services a getElement method)

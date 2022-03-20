@@ -162,7 +162,7 @@ void UI::updateHandler()
 	std::string title, presenter, link;
 	int duration = 0, likes = 0;
 
-	std::cout << "Enter new values or 'x' to left unchanged.." << std::endl;
+	std::cout << "Enter new values.." << std::endl;
 
 	this->getInput(title, presenter, duration, likes, link);
 
