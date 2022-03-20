@@ -14,10 +14,10 @@ namespace RepositoryTests
 	{
 		TutorialRepo repo;
 
-		Tutorial tutorial1("title1", "presenter1", 1, 2, "link1");
-		Tutorial tutorial2("title2", "presenter2", 1, 2, "link2");
-		Tutorial tutorial3("title3", "presenter3", 1, 2, "link3");
-		Tutorial tutorial4("title4", "presenter4", 1, 2, "link1");
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
+		Tutorial tutorial4(repo.getNextId(), "title4", "presenter4", 1, 2, "link1");
 
 		repo.add(tutorial1);
 		repo.add(tutorial2);
@@ -34,19 +34,19 @@ namespace RepositoryTests
 	{
 		TutorialRepo repo;
 
-		Tutorial tutorial1("title1", "presenter1", 1, 2, "link1");
-		Tutorial tutorial2("title2", "presenter2", 1, 2, "link2");
-		Tutorial tutorial3("title3", "presenter3", 1, 2, "link3");
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
 
 		repo.add(tutorial1);
 		repo.add(tutorial2);
 
-		assert(repo.getElement(tutorial1.getId()) == tutorial1);
-		assert(repo.getElement(tutorial2.getId()) == tutorial2);
+		assert(repo.getElement(0) == tutorial1);
+		assert(repo.getElement(1) == tutorial2);
 
 		try
 		{
-			repo.getElement(tutorial3.getId());
+			repo.getElement(2);
 			assert(false);
 		}
 		catch (const std::exception& e)
@@ -61,9 +61,9 @@ namespace RepositoryTests
 	{
 		TutorialRepo repo;
 
-		Tutorial tutorial1("title1", "presenter1", 1, 2, "link1");
-		Tutorial tutorial2("title2", "presenter2", 1, 2, "link2");
-		Tutorial tutorial3("title3", "presenter3", 1, 2, "link3");
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
 
 		repo.add(tutorial1);
 		repo.add(tutorial2);
@@ -72,7 +72,7 @@ namespace RepositoryTests
 		DynamicVector<Tutorial> data = repo.getAll();
 		for (int i = 0; i < data.getSize(); i++)
 		{
-			assert(data.getElement(i) == repo.getElement(data.getElement(i).getId()));
+			assert(data.getElement(i) == repo.getElement(i));
 		}
 
 		std::cout << "\tGet all tests\n";
@@ -82,9 +82,9 @@ namespace RepositoryTests
 	{
 		TutorialRepo repo;
 
-		Tutorial tutorial1("title1", "presenter1", 1, 2, "link1");
-		Tutorial tutorial2("title2", "presenter2", 1, 2, "link2");
-		Tutorial tutorial3("title3", "presenter3", 1, 2, "link3");
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
 
 		repo.add(tutorial1);
 		assert(repo.getSize() == 1);
@@ -112,22 +112,22 @@ namespace RepositoryTests
 	{
 		TutorialRepo repo;
 
-		Tutorial tutorial1("title1", "presenter1", 1, 2, "link1");
-		Tutorial tutorial2("title2", "presenter2", 1, 2, "link2");
-		Tutorial tutorial3("title3", "presenter3", 1, 2, "link3");
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
 
 		repo.add(tutorial1);
 		repo.add(tutorial2);
 
 		assert(repo.getSize() == 2);
-		repo.remove(tutorial1.getId());
+		repo.remove(0);
 		assert(repo.getSize() == 1);
-		repo.remove(tutorial2.getId());
+		repo.remove(1);
 		assert(repo.getSize() == 0);
 
 		try
 		{
-			repo.remove(tutorial3.getId());
+			repo.remove(2);
 			assert(false);
 		}
 		catch (const std::exception& e)
@@ -142,13 +142,13 @@ namespace RepositoryTests
 	{
 		TutorialRepo repo;
 
-		Tutorial tutorial1("title1", "presenter1", 1, 2, "link1");
-		Tutorial tutorial2("title2", "presenter2", 1, 2, "link2");
-		Tutorial tutorial3("title3", "presenter3", 1, 2, "link3");
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
 		
 		try
 		{
-			repo.update(tutorial1.getId(), tutorial2);
+			repo.update(0, tutorial2);
 			assert(false);
 		}
 		catch (const std::exception& e)
@@ -158,10 +158,10 @@ namespace RepositoryTests
 
 		repo.add(tutorial1);
 
-		repo.update(tutorial1.getId(), tutorial2);
+		repo.update(0, tutorial2);
 		assert(repo.find(tutorial2) == true);
 
-		repo.update(tutorial2.getId(), tutorial3);
+		repo.update(1, tutorial3);
 		assert(repo.find(tutorial3) == true);
 
 		std::cout << "\tUpdate tests\n";

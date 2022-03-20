@@ -9,8 +9,10 @@ class TutorialRepo
 private:
 	DynamicVector <Tutorial> vector;
 	int getPosition(const unsigned int id);
+	unsigned int idCount=0;
 public:
 
+	inline int getNextId() { return this->idCount++; }
 	int getSize();
 	bool find(const Tutorial& tutorial);
 	Tutorial getElement(const unsigned int id);

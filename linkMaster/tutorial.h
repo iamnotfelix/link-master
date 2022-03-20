@@ -11,9 +11,8 @@ private:
 	int duration;
 	int likes;
 	std::string link;
-	static unsigned int idCount;
 public:
-	Tutorial(std::string title="", std::string presenter="", int duration=0, int likes=0, std::string link="");
+	Tutorial(unsigned int id=0, std::string title="", std::string presenter="", int duration=0, int likes=0, std::string link="");
 	
 	inline const unsigned int getId() const { return this->id; }
 	inline std::string getTitle() const { return this->title; }

@@ -46,11 +46,11 @@ namespace ServicesTests
 		services.add("title2", "presenter2", 2, 2, "link2");
 		services.add("title3", "presenter3", 3, 3, "link3");
 
-		services.remove(77);
+		services.remove(0);
 		assert(services.getSize() == repo.getSize());
-		services.remove(78);
+		services.remove(1);
 		assert(services.getSize() == repo.getSize());
-		services.remove(81);
+		services.remove(2);
 		assert(services.getSize() == repo.getSize());
 
 		std::cout << "\tAdd tests\n";

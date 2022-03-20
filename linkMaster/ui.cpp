@@ -216,6 +216,8 @@ void UI::commandHandler()
 		}
 		catch (std::exception& e)
 		{
+			std::cin.clear();
+			std::cin.ignore(100000, '\n');
 			std::cout << e.what();
 		}
 	}

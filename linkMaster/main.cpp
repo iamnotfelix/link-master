@@ -24,6 +24,4 @@ int main()
 	int x = getchar();
 }
 
-//TODO: add validation for integer input
-//TODO: move the idCount from the domain to the repo
 //TODO: add 'left unchanged' feature to update functionality(add to services a getElement method)
