@@ -7,6 +7,18 @@
 
 namespace ServicesTests
 {
+
+	void testInitRepo()
+	{
+		TutorialRepo repo;
+		TutorialServices services(repo);
+
+		services.initRepo();
+		assert(repo.getSize() == 10);
+
+		std::cout << "\tInit repo tests\n";
+	}
+
 	void testGetAll()
 	{
 		TutorialRepo repo;
@@ -77,6 +89,7 @@ namespace ServicesTests
 void testServices()
 {
 	std::cout << "Services tests:\n";
+	ServicesTests::testInitRepo();
 	ServicesTests::testGetAll();
 	ServicesTests::testAdd();
 	ServicesTests::testRemove();

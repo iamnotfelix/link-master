@@ -15,11 +15,10 @@ int main()
 
 	TutorialRepo repo;
 	TutorialServices services{ repo };
+	services.initRepo();
 	UI ui{ services };
 
 	ui.start();
 
 	_CrtDumpMemoryLeaks();
-
-	int x = getchar();
 }

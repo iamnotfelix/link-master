@@ -11,6 +11,8 @@ private:
 public:
 	TutorialServices(TutorialRepo& repo);
 
+	void initRepo();
+
 	int getSize();
 	DynamicVector<Tutorial> getAll();
 
