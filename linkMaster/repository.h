@@ -20,5 +20,5 @@ public:
 
 	void add(const Tutorial& tutorial);
 	void remove(const unsigned int id);
-	void update(const unsigned int id, Tutorial newTutorial); //std::string title, std::string presenter, int duration, int likes, std::string link
+	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link);
 };

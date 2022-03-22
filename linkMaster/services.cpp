@@ -28,9 +28,7 @@ void TutorialServices::remove(const unsigned int id)
 
 void TutorialServices::update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link)
 {
-	Tutorial tutorial(this->repo.getNextId(), title, presenter, duration, likes, link);
-
-	this->repo.update(id, tutorial);
+	this->repo.update(id, title, presenter, duration, likes, link);
 }
 
 

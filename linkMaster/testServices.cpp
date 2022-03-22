@@ -66,8 +66,8 @@ namespace ServicesTests
 		services.add("title2", "presenter2", 2, 2, "link2");
 		services.add("title3", "presenter3", 3, 3, "link3");
 
-		services.update(services.getAll()[0].getId(), "title4", "presenter4", 4, 4, "link4");
-		assert(services.getAll()[2].getTitle() == "title4");
+		services.update(0, "title4", "presenter4", 4, 4, "link4");
+		assert(services.getAll()[0].getTitle() == "title4");
 		
 
 		std::cout << "\tUpdate tests\n";

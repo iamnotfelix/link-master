@@ -55,13 +55,15 @@ void TutorialRepo::remove(const unsigned int id)
 	this->vector.remove(position);
 }
 
-void TutorialRepo::update(const unsigned int id, Tutorial newTutorial)
-{
+void TutorialRepo::update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link)
+{	
 	int position = this->getPosition(id);
 
-	if (position == -1)
-		throw std::exception("Tutorial not found!\n");
+	Tutorial& tutorial = this->vector.getElement(position);
 
-	this->vector.remove(position);
-	this->vector.add(newTutorial);
+	tutorial.setTitle(title);
+	tutorial.setPresenter(presenter);
+	tutorial.setDuration(duration);
+	tutorial.setLikes(likes);
+	tutorial.setLink(link);
 }

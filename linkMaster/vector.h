@@ -16,7 +16,7 @@ public:
 	~DynamicVector();
 
 	inline int getSize() const { return this->size; }
-	TElem getElement(int position) const;
+	TElem& getElement(int position) const;
 
 	void add(TElem element);
 	void remove(int position);
@@ -63,7 +63,7 @@ void DynamicVector<TElem>::resize()
 }
 
 template<typename TElem>
-TElem DynamicVector<TElem>::getElement(int position) const
+TElem& DynamicVector<TElem>::getElement(int position) const
 {
 	if (position < 0 || position > this->size - 1)
 		throw std::exception("Index out of bounds!\n");

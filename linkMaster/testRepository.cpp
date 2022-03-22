@@ -143,12 +143,10 @@ namespace RepositoryTests
 		TutorialRepo repo;
 
 		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
-		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
-		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
 		
 		try
 		{
-			repo.update(0, tutorial2);
+			repo.update(0, "title", "presenter", 1, 2, "link");
 			assert(false);
 		}
 		catch (const std::exception& e)
@@ -158,11 +156,11 @@ namespace RepositoryTests
 
 		repo.add(tutorial1);
 
-		repo.update(0, tutorial2);
-		assert(repo.find(tutorial2) == true);
+		repo.update(0, "title4", "presenter4", 1, 2, "link4");
+		assert(repo.getElement(0).getTitle() == "title4");
 
-		repo.update(1, tutorial3);
-		assert(repo.find(tutorial3) == true);
+		repo.update(0, "title5", "presenter5", 1, 2, "link5");
+		assert(repo.getElement(0).getPresenter() == "presenter5");
 
 		std::cout << "\tUpdate tests\n";
 	}
