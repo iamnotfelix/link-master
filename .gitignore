@@ -5,3 +5,5 @@
 *.filters
 *.user
 Debug
+*.log
+.opencppcov
