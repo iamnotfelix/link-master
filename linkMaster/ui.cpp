@@ -43,18 +43,20 @@ void UI::printList(DynamicVector<Tutorial>& list)
 void UI::getCommand(std::string& command)
 {
 	std::cout << ">>>";
-	std::getline(std::cin, command);
+	std::cin >> command;
 }
 
 void UI::getInput(std::string& title, std::string& presenter, int& duration, int& likes, std::string& link)
 {
+	std::cin.ignore(100, '\n');
+
 	int minutes = 0, seconds = 0;
 
 	std::cout << "Title: ";
-	std::cin >> title;
+	std::getline(std::cin, title);
 
 	std::cout << "Presenter: ";
-	std::cin >> presenter;
+	std::getline(std::cin, presenter);
 
 	while (true)
 	{
