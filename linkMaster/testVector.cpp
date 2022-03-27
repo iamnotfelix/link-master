@@ -158,6 +158,19 @@ namespace VectorTests
 		
 		std::cout << "Operator equal test: success\n";
 	}
+
+	void testOperatorPlus()
+	{
+		DynamicVector <int> vector{};
+		vector = vector + 1;
+		assert(vector.getSize() == 1);
+		vector = vector + 2;
+		assert(vector.getSize() == 2);
+		vector = 2 + vector;
+		assert(vector.getSize() == 3);
+
+
+	}
 }
 
 void testVector()
@@ -168,5 +181,6 @@ void testVector()
 	VectorTests::testAdd();
 	VectorTests::testRemove();
 	VectorTests::testOperatorEqual();
+	VectorTests::testOperatorPlus();
 	std::cout << std::endl;
 }

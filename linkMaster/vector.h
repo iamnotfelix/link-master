@@ -2,6 +2,7 @@
 
 #include <exception>
 
+
 template <typename TElem> class DynamicVector
 {
 private:
@@ -23,6 +24,9 @@ public:
 
 	DynamicVector& operator=(const DynamicVector& vector);
 	TElem operator[](int position) const;
+
+	//DynamicVector<TElem>& operator+(DynamicVector<TElem>& vector, TElem element);
+	//DynamicVector<TElem>& operator+(TElem element, DynamicVector<TElem>& vector);
 };
 
 
@@ -116,3 +120,19 @@ TElem DynamicVector<TElem>::operator[](int position) const
 
 	return this->data[position];
 }
+
+
+
+template<typename TElem>
+DynamicVector<TElem>& operator+(DynamicVector<TElem>& vector, TElem element)
+{
+	vector.add(element);
+	return vector;
+}
+
+template<typename TElem>
+DynamicVector<TElem>& operator+(TElem element, DynamicVector<TElem>& vector)
+{
+	return vector + element;
+}
+
