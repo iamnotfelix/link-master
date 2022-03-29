@@ -9,11 +9,11 @@
 
 void printMenu()
 {
+	std::cout << std::endl;
 	std::cout << "Menu:" << std::endl;
 	std::cout << "admin\tAdministrator mode." << std::endl;
 	std::cout << "user\tUser mode." << std::endl;
 	std::cout << "exit\tExit the application." << std::endl;
-	std::cout << "Enter command:" << std::endl;
 }
 
 void commandHandler(UI& ui, UserUI& userUI)
@@ -31,10 +31,12 @@ void commandHandler(UI& ui, UserUI& userUI)
 		else if (command == "admin")
 		{
 			ui.start();
+			printMenu();
 		}
 		else if (command == "user")
 		{
 			userUI.start();
+			printMenu();
 		}
 		else
 			std::cout << "Invalid command!" << std::endl;
@@ -47,7 +49,7 @@ void start()
 	TutorialServices services{ repo };
 	//services.initRepo();
 
-	TutorialRepo watchList;
+	TutorialRepo watchList{ "watchList.txt" };
 	UserServices userServices{ repo, watchList };
 
 	UI ui{ services };
