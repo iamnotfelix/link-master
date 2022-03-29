@@ -3,7 +3,53 @@
 
 #include <exception>
 #include <string>
+#include <sstream>
+#include <fstream>
+#include <vector>
 
+
+TutorialRepo::TutorialRepo(std::string filePath) : filePath{ filePath }
+{
+	if (!filePath.empty())
+	{
+		std::ifstream f(filePath);
+
+		std::string line;
+		while (std::getline(f, line))
+		{
+			std::stringstream lineStream(line);
+			std::string token;
+			std::vector <std::string> tokens;
+
+			while (std::getline(lineStream, token, ','))
+				tokens.push_back(token);
+
+			Tutorial tutorial(this->getNextId(), tokens[0], tokens[1], 
+				std::stoi(tokens[2]), std::stoi(tokens[3]), tokens[4]);
+			this->vector.add(tutorial);
+		}
+
+		f.close();
+	}
+}
+
+#include <iostream>
+TutorialRepo::~TutorialRepo()
+{
+	if (!this->filePath.empty())
+	{
+		std::ofstream f(this->filePath);
+		for (int i = 0; i < this->vector.getSize(); i++)
+		{
+			Tutorial tutorial = this->vector.getElement(i);
+			std::string line = tutorial.getTitle() + "," + tutorial.getPresenter() + "," +
+				std::to_string(tutorial.getDuration()) + "," + std::to_string(tutorial.getLikes()) + "," + tutorial.getLink() + "\n";
+			f << line;
+		}
+
+		f.close();
+	}
+}
 
 int TutorialRepo::getSize()
 {

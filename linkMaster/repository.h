@@ -10,7 +10,11 @@ private:
 	DynamicVector <Tutorial> vector;
 	int getPosition(const unsigned int id);
 	unsigned int idCount=0;
+	std::string filePath;
 public:
+
+	TutorialRepo(std::string filePath="");
+	~TutorialRepo();
 
 	/*
 	* Returns the next unique id.
