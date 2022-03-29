@@ -185,7 +185,8 @@ void UI::commandHandler()
 		{
 			if (command == "exit")
 			{
-				exit(0);
+				break;
+				//exit(0);
 			}
 			else if (command == "add")
 			{

@@ -10,6 +10,16 @@
 
 namespace RepositoryTests
 {
+	void testConstructor()
+	{
+		TutorialRepo repo{ "testFile.txt" };
+		assert(repo.getSize() == 10);
+		assert(repo.getElement(0).getTitle() == "Title 1");
+		assert(repo.getElement(3).getTitle() == "Title 4");
+		assert(repo.getElement(3).getLink() == "Link 4");
+		assert(repo.getElement(9).getLink() == "https://en.cppreference.com/w/");
+	}
+
 	void testFind()
 	{
 		TutorialRepo repo;
@@ -26,8 +36,6 @@ namespace RepositoryTests
 		assert(repo.find(tutorial2) == true);
 		assert(repo.find(tutorial1) == true);
 		assert(repo.find(tutorial4) == true);
-
-		std::cout << "\tFind tests\n";
 	}
 
 	void testGetElement()
@@ -53,8 +61,6 @@ namespace RepositoryTests
 		{
 			assert(strcmp(e.what(), "Tutorial not found!\n") == 0);
 		}
-
-		std::cout << "\tGet element test\n";
 	}
 	
 	void testGetAll()
@@ -74,8 +80,6 @@ namespace RepositoryTests
 		{
 			assert(data.getElement(i) == repo.getElement(i));
 		}
-
-		std::cout << "\tGet all tests\n";
 	}
 
 	void testAdd()
@@ -104,8 +108,6 @@ namespace RepositoryTests
 		{
 			assert(strcmp(e.what(), "Tutorial already exists!\n") == 0);
 		}
-
-		std::cout << "\tAdd tests\n";
 	}
 	
 	void testRemove()
@@ -134,8 +136,6 @@ namespace RepositoryTests
 		{
 			assert(strcmp(e.what(), "Tutorial not found!\n") == 0);
 		}
-
-		std::cout << "\tRemove tests\n";
 	}
 
 	void testUpdate()
@@ -161,19 +161,16 @@ namespace RepositoryTests
 
 		repo.update(0, "title5", "presenter5", 1, 2, "link5");
 		assert(repo.getElement(0).getPresenter() == "presenter5");
-
-		std::cout << "\tUpdate tests\n";
 	}
 }
 
 void testRepository()
 {
-	std::cout << "Repository tests:\n";
+	RepositoryTests::testConstructor();
 	RepositoryTests::testFind();
 	RepositoryTests::testGetElement();
 	RepositoryTests::testGetAll();
 	RepositoryTests::testAdd();
 	RepositoryTests::testRemove();
 	RepositoryTests::testUpdate();
-	std::cout << std::endl;
 }
