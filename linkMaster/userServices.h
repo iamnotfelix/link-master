@@ -15,7 +15,7 @@ public:
 	void addToWatchList(const Tutorial& tutorial);
 	void deleteFromWatchList(const Tutorial& tutorial);
 	void likeTutorial(const Tutorial& tutorial);
+	int getWatchListSize();
 	DynamicVector<Tutorial> getWatchList();
-
 };
 

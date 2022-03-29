@@ -63,13 +63,13 @@ namespace UserServicesTests
 		userServices.addToWatchList(tutorial2);
 		userServices.addToWatchList(tutorial3);
 
-		assert(watchList.getSize() == 3);
+		assert(userServices.getWatchListSize() == 3);
 		userServices.deleteFromWatchList(tutorial1);
-		assert(watchList.getSize() == 2);
+		assert(userServices.getWatchListSize() == 2);
 		userServices.deleteFromWatchList(tutorial2);
-		assert(watchList.getSize() == 1);
+		assert(userServices.getWatchListSize() == 1);
 		userServices.deleteFromWatchList(tutorial3);
-		assert(watchList.getSize() == 0);
+		assert(userServices.getWatchListSize() == 0);
 	}
 
 	void testLikeTutorial()

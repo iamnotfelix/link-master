@@ -36,6 +36,11 @@ void UserServices::likeTutorial(const Tutorial& tutorial)
 	this->repo.update(tutorial.getId(), tutorial.getTitle(), tutorial.getPresenter(), tutorial.getDuration(), newLikes, tutorial.getLink());
 }
 
+int UserServices::getWatchListSize()
+{
+	return this->watchList.getSize();
+}
+
 DynamicVector<Tutorial> UserServices::getWatchList()
 {
 	return this->watchList.getAll();
