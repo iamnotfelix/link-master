@@ -26,10 +26,8 @@ void UI::printList(std::vector<Tutorial>& list)
 
 	std::cout << "ID\tTitle\tPresenter\tDuration\tLikes\tLink\n";
 
-	for (int i = 0; i < list.size(); i++)
+	for (auto tutorial : list)
 	{
-		Tutorial tutorial = list[i];
-
 		int duration = tutorial.getDuration();
 		int minutes = duration / 60;
 		int seconds = duration % 60;

@@ -6,6 +6,7 @@
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 
 TutorialRepo::TutorialRepo(std::string filePath) : filePath{ filePath }
@@ -38,10 +39,8 @@ TutorialRepo::~TutorialRepo()
 	if (!this->filePath.empty())
 	{
 		std::ofstream f(this->filePath);
-		//for (int i = 0; i < this->vector.size(); i++)
 		for (Tutorial tutorial : this->vector)
 		{
-			//Tutorial tutorial = this->vector[i];
 			std::string line = tutorial.getTitle() + "," + tutorial.getPresenter() + "," +
 				std::to_string(tutorial.getDuration()) + "," + std::to_string(tutorial.getLikes()) + "," + tutorial.getLink() + "\n";
 			f << line;
@@ -58,11 +57,8 @@ int TutorialRepo::getSize()
 
 bool TutorialRepo::find(const Tutorial& tutorial)
 {
-	for (int i = 0; i < this->vector.size(); i++)
-		if (this->vector[i] == tutorial)
-			return true;
-	
-	return false;
+	auto result = std::find(this->vector.begin(), this->vector.end(), tutorial);
+	return (result != this->vector.end());
 }
 
 int TutorialRepo::getPosition(const unsigned int id)
