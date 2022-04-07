@@ -1,13 +1,13 @@
 #pragma once
 
-#include "vector.h"
+#include <vector>
 #include "tutorial.h"
 
 
 class TutorialRepo
 {
 private:
-	DynamicVector <Tutorial> vector;
+	std::vector<Tutorial> vector;
 	int getPosition(const unsigned int id);
 	unsigned int idCount=0;
 	std::string filePath;
@@ -41,9 +41,9 @@ public:
 	Tutorial getElement(const unsigned int id);
 
 	/*
-	* Returns a dynamic array containing a copy of the repository.
+	* Returns a vector containing a copy of the repository.
 	*/
-	DynamicVector<Tutorial> getAll();
+	std::vector<Tutorial> getAll();
 
 	/*
 	* Adds a tutorial to the repository.

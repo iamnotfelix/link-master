@@ -15,7 +15,7 @@ public:
 	* Returns a dynamic vector containing all the tutorials from the repo that match the given presenter.
 	*	presenter - the presenter to be matched
 	*/
-	DynamicVector<Tutorial> getTutorialsByPresenter(const std::string presenter="");
+	std::vector<Tutorial> getTutorialsByPresenter(const std::string presenter="");
 
 	/*
 	* Adds a tutorial to the watchlist.
@@ -43,6 +43,6 @@ public:
 	/*
 	* Returns a dynamic vector containing the watch list.
 	*/
-	DynamicVector<Tutorial> getWatchList();
+	std::vector<Tutorial> getWatchList();
 };
 

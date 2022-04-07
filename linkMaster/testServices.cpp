@@ -2,7 +2,6 @@
 #include "tests.h"
 #include "services.h"
 
-#include <iostream>
 #include <assert.h>
 
 namespace ServicesTests
@@ -15,8 +14,6 @@ namespace ServicesTests
 
 		services.initRepo();
 		assert(repo.getSize() == 10);
-
-		std::cout << "\tInit repo tests\n";
 	}
 
 	void testGetAll()
@@ -28,10 +25,8 @@ namespace ServicesTests
 		services.add("title2", "presenter2", 2, 2, "link2");
 		services.add("title3", "presenter3", 3, 3, "link3");
 
-		DynamicVector<Tutorial> data = services.getAll();
-		assert(data.getSize() == 3);
-
-		std::cout << "\tGet all tests\n";
+		std::vector<Tutorial> data = services.getAll();
+		assert(data.size() == 3);
 	}
 
 	void testAdd()
@@ -45,8 +40,6 @@ namespace ServicesTests
 
 		assert(services.getSize() == 3);
 		assert(repo.getSize() == 3);
-
-		std::cout << "\tAdd tests\n";
 	}
 
 	void testRemove()
@@ -64,9 +57,6 @@ namespace ServicesTests
 		assert(services.getSize() == repo.getSize());
 		services.remove(2);
 		assert(services.getSize() == repo.getSize());
-
-		std::cout << "\tAdd tests\n";
-		std::cout << "\tRemove tests\n";
 	}
 	
 	void testUpdate()
@@ -80,19 +70,14 @@ namespace ServicesTests
 
 		services.update(0, "title4", "presenter4", 4, 4, "link4");
 		assert(services.getAll()[0].getTitle() == "title4");
-		
-
-		std::cout << "\tUpdate tests\n";
 	}
 }
 
 void testServices()
 {
-	std::cout << "Services tests:\n";
 	ServicesTests::testInitRepo();
 	ServicesTests::testGetAll();
 	ServicesTests::testAdd();
 	ServicesTests::testRemove();
 	ServicesTests::testUpdate();
-	std::cout << std::endl;
 }

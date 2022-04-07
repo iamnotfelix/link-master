@@ -4,7 +4,6 @@
 #include "tutorial.h"
 
 #include <assert.h>
-#include <iostream>
 #include <exception>
 
 
@@ -75,10 +74,10 @@ namespace RepositoryTests
 		repo.add(tutorial2);
 		repo.add(tutorial3);
 
-		DynamicVector<Tutorial> data = repo.getAll();
-		for (int i = 0; i < data.getSize(); i++)
+		std::vector<Tutorial> data = repo.getAll();
+		for (int i = 0; i < data.size(); i++)
 		{
-			assert(data.getElement(i) == repo.getElement(i));
+			assert(data[i] == repo.getElement(i));
 		}
 	}
 

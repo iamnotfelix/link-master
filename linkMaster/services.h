@@ -24,7 +24,7 @@ public:
 	/*
 	* Returns a dynamic array containing a copy of the repository.
 	*/
-	DynamicVector<Tutorial> getAll();
+	std::vector<Tutorial> getAll();
 
 	/*
 	* Adds a tutorial.

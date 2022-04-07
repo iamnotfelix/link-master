@@ -19,16 +19,16 @@ void UI::printMenu()
 	std::cout << "exit\tExit the app." << std::endl;
 }
 
-void UI::printList(DynamicVector<Tutorial>& list)
+void UI::printList(std::vector<Tutorial>& list)
 {
-	if (list.getSize() == 0)
+	if (list.size() == 0)
 		throw std::exception("There is nothing to print!\n");
 
 	std::cout << "ID\tTitle\tPresenter\tDuration\tLikes\tLink\n";
 
-	for (int i = 0; i < list.getSize(); i++)
+	for (int i = 0; i < list.size(); i++)
 	{
-		Tutorial tutorial = list.getElement(i);
+		Tutorial tutorial = list[i];
 
 		int duration = tutorial.getDuration();
 		int minutes = duration / 60;
@@ -205,7 +205,7 @@ void UI::commandHandler()
 			}
 			else if (command == "list")
 			{
-				DynamicVector<Tutorial> list = this->services.getAll();
+				std::vector<Tutorial> list = this->services.getAll();
 				this->printList(list);
 			}
 			else if (command == "help")

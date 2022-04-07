@@ -7,7 +7,7 @@ class UI
 private:
 	TutorialServices& services;
 	void printMenu();
-	void printList(DynamicVector<Tutorial>& list);
+	void printList(std::vector<Tutorial>& list);
 	void getCommand(std::string& command);
 	void getInput(std::string& title, std::string& presenter, int& duration, int& likes, std::string& link);
 	void addHandler();

@@ -26,22 +26,22 @@ TutorialRepo::TutorialRepo(std::string filePath) : filePath{ filePath }
 
 			Tutorial tutorial(this->getNextId(), tokens[0], tokens[1], 
 				std::stoi(tokens[2]), std::stoi(tokens[3]), tokens[4]);
-			this->vector.add(tutorial);
+			this->vector.push_back(tutorial);
 		}
 
 		f.close();
 	}
 }
 
-#include <iostream>
 TutorialRepo::~TutorialRepo()
 {
 	if (!this->filePath.empty())
 	{
 		std::ofstream f(this->filePath);
-		for (int i = 0; i < this->vector.getSize(); i++)
+		//for (int i = 0; i < this->vector.size(); i++)
+		for (Tutorial tutorial : this->vector)
 		{
-			Tutorial tutorial = this->vector.getElement(i);
+			//Tutorial tutorial = this->vector[i];
 			std::string line = tutorial.getTitle() + "," + tutorial.getPresenter() + "," +
 				std::to_string(tutorial.getDuration()) + "," + std::to_string(tutorial.getLikes()) + "," + tutorial.getLink() + "\n";
 			f << line;
@@ -53,13 +53,13 @@ TutorialRepo::~TutorialRepo()
 
 int TutorialRepo::getSize()
 {
-	return this->vector.getSize();
+	return this->vector.size();
 }
 
 bool TutorialRepo::find(const Tutorial& tutorial)
 {
-	for (int i = 0; i < this->vector.getSize(); i++)
-		if (this->vector.getElement(i) == tutorial)
+	for (int i = 0; i < this->vector.size(); i++)
+		if (this->vector[i] == tutorial)
 			return true;
 	
 	return false;
@@ -67,8 +67,8 @@ bool TutorialRepo::find(const Tutorial& tutorial)
 
 int TutorialRepo::getPosition(const unsigned int id)
 {
-	for (int i = 0; i < this->vector.getSize(); i++)
-		if (this->vector.getElement(i).getId() == id)
+	for (int i = 0; i < this->vector.size(); i++)
+		if (this->vector[i].getId() == id)
 			return i;
 
 	throw std::exception("Tutorial not found!\n");
@@ -81,9 +81,9 @@ Tutorial TutorialRepo::getElement(const unsigned int id)
 	return this->vector[position];
 }
 
-DynamicVector<Tutorial> TutorialRepo::getAll()
+std::vector<Tutorial> TutorialRepo::getAll()
 {
-	return DynamicVector<Tutorial>{this->vector};
+	return std::vector<Tutorial>{this->vector};
 }
 
 void TutorialRepo::add(const Tutorial& tutorial)
@@ -91,21 +91,21 @@ void TutorialRepo::add(const Tutorial& tutorial)
 	if (this->find(tutorial))
 		throw std::exception("Tutorial already exists!\n");
 
-	this->vector.add(tutorial);
+	this->vector.push_back(tutorial);
 }
 
 void TutorialRepo::remove(const unsigned int id)
 {
 	int position = this->getPosition(id);
 
-	this->vector.remove(position);
+	this->vector.erase(this->vector.begin() + position);
 }
 
 void TutorialRepo::update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link)
 {	
 	int position = this->getPosition(id);
 
-	Tutorial& tutorial = this->vector.getElement(position);
+	Tutorial& tutorial = this->vector[position];
 
 	tutorial.setTitle(title);
 	tutorial.setPresenter(presenter);

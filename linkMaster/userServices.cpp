@@ -2,19 +2,19 @@
 
 UserServices::UserServices(TutorialRepo& repo, TutorialRepo& watchList) : repo{ repo }, watchList{ watchList } {}
 
-DynamicVector<Tutorial> UserServices::getTutorialsByPresenter(const std::string presenter)
+std::vector<Tutorial> UserServices::getTutorialsByPresenter(const std::string presenter)
 {
-	DynamicVector<Tutorial> tutorials = this->repo.getAll();
+	std::vector<Tutorial> tutorials = this->repo.getAll();
 	
 	if (presenter.empty())
 		return tutorials;
 
-	DynamicVector<Tutorial> wanted;
-	for (int i = 0; i < tutorials.getSize(); i++)
+	std::vector<Tutorial> wanted;
+	for (int i = 0; i < tutorials.size(); i++)
 	{
-		Tutorial tutorial = tutorials.getElement(i);
+		Tutorial tutorial = tutorials[i];
 		if (tutorial.getPresenter() == presenter)
-			wanted.add(tutorial);
+			wanted.push_back(tutorial);
 	}
 	
 	return wanted;
@@ -41,7 +41,7 @@ int UserServices::getWatchListSize()
 	return this->watchList.getSize();
 }
 
-DynamicVector<Tutorial> UserServices::getWatchList()
+std::vector<Tutorial> UserServices::getWatchList()
 {
 	return this->watchList.getAll();
 }

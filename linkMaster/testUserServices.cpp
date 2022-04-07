@@ -21,14 +21,14 @@ namespace UserServicesTests
 		TutorialRepo watchList;
 		UserServices userServices(repo, watchList);
 
-		DynamicVector<Tutorial> vector = userServices.getTutorialsByPresenter("");
-		assert(vector.getElement(0).getTitle() == "title1");
-		assert(vector.getElement(1).getTitle() == "title2");
-		assert(vector.getElement(2).getTitle() == "title3");
+		std::vector<Tutorial> vector = userServices.getTutorialsByPresenter("");
+		assert(vector[0].getTitle() == "title1");
+		assert(vector[1].getTitle() == "title2");
+		assert(vector[2].getTitle() == "title3");
 
 		vector = userServices.getTutorialsByPresenter("presenter");
-		assert(vector.getElement(0).getTitle() == "title1");
-		assert(vector.getElement(1).getTitle() == "title3");
+		assert(vector[0].getTitle() == "title1");
+		assert(vector[1].getTitle() == "title3");
 	}
 
 	void testAddToWatchList()
@@ -100,11 +100,11 @@ namespace UserServicesTests
 		userServices.addToWatchList(tutorial2);
 		userServices.addToWatchList(tutorial3);
 
-		DynamicVector<Tutorial> vector = userServices.getWatchList();
+		std::vector<Tutorial> vector = userServices.getWatchList();
 
-		assert(vector.getElement(0).getTitle() == "title1");
-		assert(vector.getElement(1).getTitle() == "title2");
-		assert(vector.getElement(2).getTitle() == "title3");
+		assert(vector[0].getTitle() == "title1");
+		assert(vector[1].getTitle() == "title2");
+		assert(vector[2].getTitle() == "title3");
 	}
 }
 

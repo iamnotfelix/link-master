@@ -80,22 +80,22 @@ void UserUI::tutorialsHandler()
 	std::cout << "Presenter: ";
 	std::getline(std::cin, presenter);
 
-	DynamicVector<Tutorial>  tutorials = this->userServices.getTutorialsByPresenter(presenter);
+	std::vector<Tutorial>  tutorials = this->userServices.getTutorialsByPresenter(presenter);
 	
-	if (tutorials.getSize() == 0)
+	if (tutorials.size() == 0)
 		throw std::exception("No matching tutorials!\n");
 
 	int i = 0;
 	while (true)
 	{
-		Tutorial tutorial = tutorials.getElement(i);
+		Tutorial tutorial = tutorials[i];
 
 		this->diplayTutorial(tutorial);
 		this->printActionMenu();
 		this->actionHandler(tutorial);
 
 		i++;
-		if (i == tutorials.getSize())
+		if (i == tutorials.size())
 			i = 0;
 	}
 }
@@ -141,8 +141,8 @@ void UserUI::watchListHandler()
 	int i = 0;
 	while (true && this->userServices.getWatchListSize() != 0)
 	{
-		DynamicVector <Tutorial> watchList = this->userServices.getWatchList();
-		Tutorial tutorial = watchList.getElement(i);
+		std::vector<Tutorial> watchList = this->userServices.getWatchList();
+		Tutorial tutorial = watchList[i];
 
 		this->diplayTutorial(tutorial);
 		this->printWatchMenu();

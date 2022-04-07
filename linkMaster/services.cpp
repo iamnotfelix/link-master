@@ -23,7 +23,7 @@ void TutorialServices::initRepo()
 	this->add("Title 10", "Presenter 10", 1000, 10000, "https://en.cppreference.com/w/");
 }
 
-DynamicVector<Tutorial> TutorialServices::getAll()
+std::vector<Tutorial> TutorialServices::getAll()
 {
 	return this->repo.getAll();
 }

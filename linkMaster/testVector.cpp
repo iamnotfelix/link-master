@@ -3,7 +3,6 @@
 #include "vector.h"
 
 #include <assert.h>
-#include <iostream>
 #include <string>
 #include <exception>
 
@@ -20,8 +19,6 @@ namespace VectorTests
 
 		DynamicVector <int> vector3{ vector2 };
 		assert(vector3.getSize() == 0);
-
-		std::cout << "Constructor tests: success\n";
 	}
 
 	void testGetters()
@@ -76,8 +73,6 @@ namespace VectorTests
 		{
 			assert(strcmp(e.what(), "Index out of bounds!\n") == 0);
 		}
-
-		std::cout << "Getters tests: success\n";
 	}
 
 	void testAdd()
@@ -97,8 +92,6 @@ namespace VectorTests
 		assert(vectorCopy.getSize() == 10);
 		for(int i = 1; i <= 10; i++)
 			assert(vectorCopy.getElement(i - 1) == i);
-
-		std::cout << "Add tests: success\n";
 	}
 
 	void testRemove()
@@ -139,8 +132,6 @@ namespace VectorTests
 			vector.remove(0);
 			assert(vector.getSize() == 10 - i);
 		}
-
-		std::cout << "Remove tests: success\n";
 	}
 
 	void testOperatorEqual()
@@ -155,8 +146,6 @@ namespace VectorTests
 		assert(vector2.getSize() == 1);
 		assert(vector2.getElement(0) == 1);
 		assert(vector2[0] == 1);
-		
-		std::cout << "Operator equal test: success\n";
 	}
 
 	void testOperatorPlus()
@@ -168,19 +157,15 @@ namespace VectorTests
 		assert(vector.getSize() == 2);
 		vector = 2 + vector;
 		assert(vector.getSize() == 3);
-
-
 	}
 }
 
 void testVector()
 {
-	std::cout << "Vector tests:\n";
 	VectorTests::testConstructor();
 	VectorTests::testGetters();
 	VectorTests::testAdd();
 	VectorTests::testRemove();
 	VectorTests::testOperatorEqual();
 	VectorTests::testOperatorPlus();
-	std::cout << std::endl;
 }

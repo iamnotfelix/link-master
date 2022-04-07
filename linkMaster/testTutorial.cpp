@@ -2,7 +2,6 @@
 #include "tests.h"
 #include "tutorial.h"
 
-#include <iostream>
 #include <assert.h>
 
 namespace TutorialTests
@@ -22,8 +21,6 @@ namespace TutorialTests
 		Tutorial tutorial2{ 1, "title2", "presenter2", 12, 100, "link2" };
 
 		assert(tutorial2.getId() == 1);
-
-		std::cout << "Getters tests: success\n";
 	}
 
 	void testOperatorEqualEqual()
@@ -34,15 +31,11 @@ namespace TutorialTests
 
 		assert(tutorial1 == tutorial2);
 		assert(!(tutorial1 == tutorial3));
-
-		std::cout << "Operator '==' tests: success\n";
 	}
 }
 
 void testTutorial()
 {
-	std::cout << "Tutorial tests:\n"; 
 	TutorialTests::testGetters();
 	TutorialTests::testOperatorEqualEqual();
-	std::cout << std::endl;
 }
