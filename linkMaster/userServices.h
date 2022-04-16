@@ -6,11 +6,11 @@
 class UserServices
 {
 private:
-	TutorialRepo& repo;
-	TutorialRepo& watchList;
+	Repository& repo;
+	Repository& watchList;
 
 public:
-	UserServices(TutorialRepo& repo, TutorialRepo& watchList);
+	UserServices(Repository& repo, Repository& watchList);
 	/*
 	* Returns a dynamic vector containing all the tutorials from the repo that match the given presenter.
 	*	presenter - the presenter to be matched

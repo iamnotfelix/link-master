@@ -7,7 +7,7 @@ int TutorialServices::getSize()
 	return this->repo.getSize();
 }
 
-TutorialServices::TutorialServices(TutorialRepo& repo) : repo{ repo } {}
+TutorialServices::TutorialServices(Repository& repo) : repo{ repo } {}
 
 void TutorialServices::initRepo()
 {

@@ -45,11 +45,11 @@ void commandHandler(UI& ui, UserUI& userUI)
 
 void start()
 {
-	TutorialRepo repo{ "tutorialRepo.txt" };
+	Repository repo{ "tutorialRepo.txt" };
 	TutorialServices services{ repo };
 	//services.initRepo();
 
-	TutorialRepo watchList{ "watchList.txt" };
+	Repository watchList{ "watchList.txt" };
 	UserServices userServices{ repo, watchList };
 
 	UI ui{ services };

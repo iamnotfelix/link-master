@@ -11,7 +11,7 @@ namespace RepositoryTests
 {
 	void testConstructor()
 	{
-		TutorialRepo repo{ "testFile.txt" };
+		Repository repo{ "testFile.txt" };
 		assert(repo.getSize() == 10);
 		assert(repo.getElement(0).getTitle() == "Title 1");
 		assert(repo.getElement(3).getTitle() == "Title 4");
@@ -21,7 +21,7 @@ namespace RepositoryTests
 
 	void testFind()
 	{
-		TutorialRepo repo;
+		Repository repo;
 
 		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
 		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
@@ -39,7 +39,7 @@ namespace RepositoryTests
 
 	void testGetElement()
 	{
-		TutorialRepo repo;
+		Repository repo;
 
 		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
 		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
@@ -64,7 +64,7 @@ namespace RepositoryTests
 	
 	void testGetAll()
 	{
-		TutorialRepo repo;
+		Repository repo;
 
 		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
 		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
@@ -83,7 +83,7 @@ namespace RepositoryTests
 
 	void testAdd()
 	{
-		TutorialRepo repo;
+		Repository repo;
 
 		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
 		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
@@ -111,7 +111,7 @@ namespace RepositoryTests
 	
 	void testRemove()
 	{
-		TutorialRepo repo;
+		Repository repo;
 
 		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
 		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
@@ -139,7 +139,7 @@ namespace RepositoryTests
 
 	void testUpdate()
 	{
-		TutorialRepo repo;
+		Repository repo;
 
 		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
 		

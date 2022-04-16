@@ -9,7 +9,7 @@ namespace ServicesTests
 
 	void testInitRepo()
 	{
-		TutorialRepo repo;
+		Repository repo;
 		TutorialServices services(repo);
 
 		services.initRepo();
@@ -18,7 +18,7 @@ namespace ServicesTests
 
 	void testGetAll()
 	{
-		TutorialRepo repo;
+		Repository repo;
 		TutorialServices services(repo);
 
 		services.add("title1", "presenter1", 1, 1, "link1");
@@ -31,7 +31,7 @@ namespace ServicesTests
 
 	void testAdd()
 	{
-		TutorialRepo repo;
+		Repository repo;
 		TutorialServices services(repo);
 
 		services.add("title1", "presenter1", 1, 1, "link1");
@@ -44,7 +44,7 @@ namespace ServicesTests
 
 	void testRemove()
 	{
-		TutorialRepo repo;
+		Repository repo;
 		TutorialServices services(repo);
 
 		services.add("title1", "presenter1", 1, 1, "link1");
@@ -61,7 +61,7 @@ namespace ServicesTests
 	
 	void testUpdate()
 	{
-		TutorialRepo repo;
+		Repository repo;
 		TutorialServices services(repo);
 
 		services.add("title1", "presenter1", 1, 1, "link1");

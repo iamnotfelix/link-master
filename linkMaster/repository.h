@@ -4,17 +4,17 @@
 #include "tutorial.h"
 
 
-class TutorialRepo
+class Repository
 {
-private:
+protected:
 	std::vector<Tutorial> vector;
 	int getPosition(const unsigned int id);
 	unsigned int idCount=0;
 	std::string filePath;
 public:
 
-	TutorialRepo(std::string filePath="");
-	~TutorialRepo();
+	Repository(std::string filePath="");
+	~Repository();
 
 	/*
 	* Returns the next unique id.
@@ -48,15 +48,15 @@ public:
 	/*
 	* Adds a tutorial to the repository.
 	*/
-	void add(const Tutorial& tutorial);
+	virtual void add(const Tutorial& tutorial);
 
 	/*
 	* Removes a tutorial from the repository with a given id.
 	*/
-	void remove(const unsigned int id);
+	virtual void remove(const unsigned int id);
 
 	/*
 	* Update a tutorial from the repository with a given id.
 	*/
-	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link);
+	virtual void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link);
 };

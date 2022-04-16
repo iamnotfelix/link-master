@@ -4,7 +4,7 @@
 #include<algorithm>
 
 
-UserServices::UserServices(TutorialRepo& repo, TutorialRepo& watchList) : repo{ repo }, watchList{ watchList } {}
+UserServices::UserServices(Repository& repo, Repository& watchList) : repo{ repo }, watchList{ watchList } {}
 
 std::vector<Tutorial> UserServices::getTutorialsByPresenter(const std::string presenter)
 {

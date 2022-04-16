@@ -11,14 +11,14 @@ namespace UserServicesTests
 {
 	void testGetTutorialsByPresenter()
 	{
-		TutorialRepo repo;
+		Repository repo;
 		TutorialServices services(repo);
 
 		services.add("title1", "presenter", 1, 1, "link1");
 		services.add("title2", "presenter1", 1, 1, "link2");
 		services.add("title3", "presenter", 1, 1, "link3");
 
-		TutorialRepo watchList;
+		Repository watchList;
 		UserServices userServices(repo, watchList);
 
 		std::vector<Tutorial> vector = userServices.getTutorialsByPresenter("");
@@ -33,8 +33,8 @@ namespace UserServicesTests
 
 	void testAddToWatchList()
 	{
-		TutorialRepo repo;
-		TutorialRepo watchList;
+		Repository repo;
+		Repository watchList;
 		UserServices userServices(repo, watchList);
 
 		Tutorial tutorial1(0, "title1", "presenter1", 1, 1, "link1");
@@ -51,8 +51,8 @@ namespace UserServicesTests
 
 	void testDeleteFromWatchList()
 	{
-		TutorialRepo repo;
-		TutorialRepo watchList;
+		Repository repo;
+		Repository watchList;
 		UserServices userServices(repo, watchList);
 
 		Tutorial tutorial1(0, "title1", "presenter1", 1, 1, "link1");
@@ -74,12 +74,12 @@ namespace UserServicesTests
 
 	void testLikeTutorial()
 	{
-		TutorialRepo repo;
+		Repository repo;
 
 		Tutorial tutorial(0, "title", "presenter", 0, 0, "link");
 		repo.add(tutorial);
 
-		TutorialRepo watchList;
+		Repository watchList;
 		UserServices userServices(repo, watchList);
 
 		userServices.likeTutorial(tutorial);
@@ -88,8 +88,8 @@ namespace UserServicesTests
 
 	void testGetWatchList()
 	{
-		TutorialRepo repo;
-		TutorialRepo watchList;
+		Repository repo;
+		Repository watchList;
 		UserServices userServices(repo, watchList);
 
 		Tutorial tutorial1(0, "title1", "presenter1", 1, 1, "link1");

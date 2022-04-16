@@ -6,10 +6,10 @@
 class TutorialServices
 {
 private:
-	TutorialRepo& repo;
+	Repository& repo;
 
 public:
-	TutorialServices(TutorialRepo& repo);
+	TutorialServices(Repository& repo);
 
 	/*
 	* Initializes the repository with some tutorials.

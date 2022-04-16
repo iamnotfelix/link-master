@@ -9,7 +9,7 @@
 #include <algorithm>
 
 
-TutorialRepo::TutorialRepo(std::string filePath) : filePath{ filePath }
+Repository::Repository(std::string filePath) : filePath{ filePath }
 {
 	if (!filePath.empty())
 	{
@@ -34,7 +34,7 @@ TutorialRepo::TutorialRepo(std::string filePath) : filePath{ filePath }
 	}
 }
 
-TutorialRepo::~TutorialRepo()
+Repository::~Repository()
 {
 	if (!this->filePath.empty())
 	{
@@ -50,18 +50,18 @@ TutorialRepo::~TutorialRepo()
 	}
 }
 
-int TutorialRepo::getSize()
+int Repository::getSize()
 {
 	return this->vector.size();
 }
 
-bool TutorialRepo::find(const Tutorial& tutorial)
+bool Repository::find(const Tutorial& tutorial)
 {
 	auto result = std::find(this->vector.begin(), this->vector.end(), tutorial);
 	return (result != this->vector.end());
 }
 
-int TutorialRepo::getPosition(const unsigned int id)
+int Repository::getPosition(const unsigned int id)
 {
 	for (int i = 0; i < this->vector.size(); i++)
 		if (this->vector[i].getId() == id)
@@ -70,19 +70,19 @@ int TutorialRepo::getPosition(const unsigned int id)
 	throw std::exception("Tutorial not found!\n");
 }
 
-Tutorial TutorialRepo::getElement(const unsigned int id)
+Tutorial Repository::getElement(const unsigned int id)
 {
 	int position = this->getPosition(id);
 
 	return this->vector[position];
 }
 
-std::vector<Tutorial> TutorialRepo::getAll()
+std::vector<Tutorial> Repository::getAll()
 {
 	return std::vector<Tutorial>{this->vector};
 }
 
-void TutorialRepo::add(const Tutorial& tutorial)
+void Repository::add(const Tutorial& tutorial)
 {
 	if (this->find(tutorial))
 		throw std::exception("Tutorial already exists!\n");
@@ -90,14 +90,14 @@ void TutorialRepo::add(const Tutorial& tutorial)
 	this->vector.push_back(tutorial);
 }
 
-void TutorialRepo::remove(const unsigned int id)
+void Repository::remove(const unsigned int id)
 {
 	int position = this->getPosition(id);
 
 	this->vector.erase(this->vector.begin() + position);
 }
 
-void TutorialRepo::update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link)
+void Repository::update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link)
 {	
 	int position = this->getPosition(id);
 
