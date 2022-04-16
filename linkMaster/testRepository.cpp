@@ -5,19 +5,20 @@
 
 #include <assert.h>
 #include <exception>
+#include <fstream>
 
 
 namespace RepositoryTests
 {
-	void testConstructor()
+	/*void testConstructor()
 	{
-		Repository repo{ "testFile.txt" };
+		Repository repo;
 		assert(repo.getSize() == 10);
 		assert(repo.getElement(0).getTitle() == "Title 1");
 		assert(repo.getElement(3).getTitle() == "Title 4");
 		assert(repo.getElement(3).getLink() == "Link 4");
 		assert(repo.getElement(9).getLink() == "https://en.cppreference.com/w/");
-	}
+	}*/
 
 	void testFind()
 	{
@@ -163,13 +164,153 @@ namespace RepositoryTests
 	}
 }
 
+namespace TXTRepositoryTests
+{
+	void testAdd()
+	{
+		std::ofstream f("testFile.txt");
+		f << "title5|presenter5|1|2|link5\n";
+		f.close();
+
+		TXTRepository repo{"testFile.txt"};
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
+
+		repo.add(tutorial1);
+		assert(repo.getSize() == 2);
+
+		repo.add(tutorial2);
+		assert(repo.getSize() == 3);
+
+		repo.add(tutorial3);
+		assert(repo.getSize() == 4);
+	}
+
+	void testRemove()
+	{
+		std::ofstream f("testFile.txt");
+		f << "";
+		f.close();
+
+		TXTRepository repo{ "testFile.txt" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
+
+		repo.add(tutorial1);
+		repo.add(tutorial2);
+
+		assert(repo.getSize() == 2);
+		repo.remove(0);
+		assert(repo.getSize() == 1);
+		repo.remove(1);
+		assert(repo.getSize() == 0);
+	}
+
+	void testUpdate()
+	{
+		std::ofstream f("testFile.txt");
+		f << "";
+		f.close();
+
+		TXTRepository repo{ "testFile.txt" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+
+		repo.add(tutorial1);
+
+		repo.update(0, "title4", "presenter4", 1, 2, "link4");
+		assert(repo.getElement(0).getTitle() == "title4");
+
+		repo.update(0, "title5", "presenter5", 1, 2, "link5");
+		assert(repo.getElement(0).getPresenter() == "presenter5");
+	}
+}
+
+namespace CSVRepositoryTests
+{
+	void testAdd()
+	{
+		std::ofstream f("testFile.txt");
+		f << "title5,presenter5,1,2,link5\n";
+		f.close();
+
+		CSVRepository repo{ "testFile.txt" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
+
+		repo.add(tutorial1);
+		assert(repo.getSize() == 2);
+
+		repo.add(tutorial2);
+		assert(repo.getSize() == 3);
+
+		repo.add(tutorial3);
+		assert(repo.getSize() == 4);
+	}
+
+	void testRemove()
+	{
+		std::ofstream f("testFile.txt");
+		f << "";
+		f.close();
+
+		CSVRepository repo{ "testFile.txt" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
+
+		repo.add(tutorial1);
+		repo.add(tutorial2);
+
+		assert(repo.getSize() == 2);
+		repo.remove(0);
+		assert(repo.getSize() == 1);
+		repo.remove(1);
+		assert(repo.getSize() == 0);
+	}
+
+	void testUpdate()
+	{
+		std::ofstream f("testFile.txt");
+		f << "";
+		f.close();
+
+		CSVRepository repo{ "testFile.txt" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+
+		repo.add(tutorial1);
+
+		repo.update(0, "title4", "presenter4", 1, 2, "link4");
+		assert(repo.getElement(0).getTitle() == "title4");
+
+		repo.update(0, "title5", "presenter5", 1, 2, "link5");
+		assert(repo.getElement(0).getPresenter() == "presenter5");
+	}
+}
+
 void testRepository()
 {
-	RepositoryTests::testConstructor();
+	//RepositoryTests::testConstructor();
 	RepositoryTests::testFind();
 	RepositoryTests::testGetElement();
 	RepositoryTests::testGetAll();
 	RepositoryTests::testAdd();
 	RepositoryTests::testRemove();
 	RepositoryTests::testUpdate();
+
+	TXTRepositoryTests::testAdd();
+	TXTRepositoryTests::testRemove();
+	TXTRepositoryTests::testUpdate();
+
+	CSVRepositoryTests::testAdd();
+	CSVRepositoryTests::testRemove();
+	CSVRepositoryTests::testUpdate();
 }
