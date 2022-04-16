@@ -10,12 +10,7 @@ protected:
 	std::vector<Tutorial> vector;
 	int getPosition(const unsigned int id);
 	unsigned int idCount=0;
-	std::string filePath;
 public:
-
-	Repository(std::string filePath="");
-	~Repository();
-
 	/*
 	* Returns the next unique id.
 	*/
@@ -59,4 +54,52 @@ public:
 	* Update a tutorial from the repository with a given id.
 	*/
 	virtual void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link);
+};
+
+
+class TXTRepository :public Repository
+{
+private:
+	char separator = '|';
+	std::string filePath;
+	void readAll();
+	void writeAll();
+	void append(const Tutorial& tutorial);
+public:
+	TXTRepository(std::string filePath);
+	void add(const Tutorial& tutorial) override;
+	void remove(const unsigned int id) override;
+	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
+};
+
+
+class CSVRepository :public Repository
+{
+private:
+	char separator = ',';
+	std::string filePath;
+	void readAll();
+	void writeAll();
+	void append(const Tutorial& tutorial);
+public:
+	CSVRepository(std::string filePath);
+	void add(const Tutorial& tutorial) override;
+	void remove(const unsigned int id) override;
+	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
+};
+
+
+class HTMLRepository :public Repository
+{
+private:
+	std::string filePath;
+	void readAll();
+	void writeAll();
+	void append(const Tutorial& tutorial);
+public:
+	HTMLRepository(std::string filePath);
+	void add(const Tutorial& tutorial) override;
+	void remove(const unsigned int id) override;
+	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
+
 };
