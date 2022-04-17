@@ -70,6 +70,8 @@ public:
 	void add(const Tutorial& tutorial) override;
 	void remove(const unsigned int id) override;
 	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
+
+	inline std::string getFilePath() { return this->filePath; };
 };
 
 
@@ -86,6 +88,8 @@ public:
 	void add(const Tutorial& tutorial) override;
 	void remove(const unsigned int id) override;
 	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
+
+	inline std::string getFilePath() { return this->filePath; };
 };
 
 
@@ -106,4 +110,5 @@ public:
 	void remove(const unsigned int id) override;
 	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
 
+	inline std::string getFilePath() { return this->filePath; };
 };
