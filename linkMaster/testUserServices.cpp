@@ -5,6 +5,7 @@
 #include "services.h"
 
 #include <assert.h>
+#include <fstream>
 
 
 namespace UserServicesTests
@@ -106,6 +107,41 @@ namespace UserServicesTests
 		assert(vector[1].getTitle() == "title2");
 		assert(vector[2].getTitle() == "title3");
 	}
+
+	void testGetWatchListPath()
+	{
+		std::ofstream f("testFile.txt");
+		f << "";
+		f.close();
+
+		Repository repo1;
+		Repository watchList1;
+		UserServices userServices1(repo1, watchList1);
+		try
+		{
+			userServices1.getWatchListFilePath();
+			assert(false);
+		}
+		catch (const std::exception& e)
+		{
+			assert(e.what() == std::string("Cannot open app when using in-memory repository!\n"));
+		}
+
+		TXTRepository repo2("testFile.txt");
+		TXTRepository watchList2("testFile.txt");
+		UserServices userServices2(repo2, watchList2);
+		assert(userServices2.getWatchListFilePath() == "testFile.txt");
+
+		CSVRepository repo3("testFile.txt");
+		CSVRepository watchList3("testFile.txt");
+		UserServices userServices3(repo3, watchList3);
+		assert(userServices3.getWatchListFilePath() == "testFile.txt");
+
+		HTMLRepository repo4("testFile.txt");
+		HTMLRepository watchList4("testFile.txt");
+		UserServices userServices4(repo4, watchList4);
+		assert(userServices4.getWatchListFilePath() == "testFile.txt");
+	}
 }
 
 
@@ -116,4 +152,5 @@ void testUserServices()
 	UserServicesTests::testDeleteFromWatchList();
 	UserServicesTests::testLikeTutorial();
 	UserServicesTests::testGetWatchList();
+	UserServicesTests::testGetWatchListPath();
 }
