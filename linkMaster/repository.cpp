@@ -234,6 +234,7 @@ HTMLRepository::HTMLRepository(std::string filePath) : filePath{ filePath }
 
 void HTMLRepository::leftTrim(std::string& str)
 {
+	if (str == "") return;
 	const std::string whiteSpace = " \n\r\t\f\v";
 	int start = str.find_first_not_of(whiteSpace);
 	str.erase(str.begin(), str.begin() + start);
@@ -242,6 +243,7 @@ void HTMLRepository::leftTrim(std::string& str)
 
 void HTMLRepository::rightTrim(std::string& str)
 {
+	if (str == "") return;
 	const std::string whiteSpace = " \n\r\t\f\v";
 	int start = str.find_last_not_of(whiteSpace);
 	str.erase(str.begin() + start + 1, str.end());
