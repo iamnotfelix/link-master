@@ -44,5 +44,7 @@ public:
 	* Returns a dynamic vector containing the watch list.
 	*/
 	std::vector<Tutorial> getWatchList();
+
+	std::string getWatchListFilePath();
 };
 

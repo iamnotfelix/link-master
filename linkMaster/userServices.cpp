@@ -47,4 +47,21 @@ std::vector<Tutorial> UserServices::getWatchList()
 	return this->watchList.getAll();
 }
 
+std::string UserServices::getWatchListFilePath()
+{
+	TXTRepository* TXTPtr = dynamic_cast<TXTRepository*>(&this->watchList);
+	if (TXTPtr)
+		return TXTPtr->getFilePath();
+
+	CSVRepository* CSVPtr = dynamic_cast<CSVRepository*>(&this->watchList);
+	if (CSVPtr)
+		return CSVPtr->getFilePath();
+
+	HTMLRepository* HTMLPtr = dynamic_cast<HTMLRepository*>(&this->watchList);
+	if (HTMLPtr)
+		return HTMLPtr->getFilePath();
+
+	throw std::exception("Cannot open app when using in-memory repository!\n");
+}
+
 
