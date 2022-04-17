@@ -19,6 +19,7 @@ private:
 	bool promptLike();
 	bool watchHandler(const Tutorial& tutorial);
 	void watchListHandler();
+	void openHandler();
 
 	void commandHandler();
 

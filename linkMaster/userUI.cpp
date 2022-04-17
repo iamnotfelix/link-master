@@ -12,6 +12,7 @@ void UserUI::printMenu()
 	std::cout << "Menu:" << std::endl;
 	std::cout << "tuts\tSee available tutorials." << std::endl;
 	std::cout << "watch\tSee your watch list." << std::endl;
+	std::cout << "open\tOpen the watch list in another app." << std::endl;
 	std::cout << "help\tShow this menu." << std::endl;
 	std::cout << "exit\tExit the application." << std::endl;
 }
@@ -156,6 +157,13 @@ void UserUI::watchListHandler()
 	throw std::exception("Watch list is empty!\n");
 }
 
+void UserUI::openHandler()
+{
+	std::string aux = "start " + this->userServices.getWatchListFilePath();
+	char* link = &aux[0];
+	system(link);
+}
+
 void UserUI::commandHandler()
 {
 	while (true)
@@ -181,6 +189,10 @@ void UserUI::commandHandler()
 			else if (command == "watch")
 			{
 				this->watchListHandler();
+			}
+			else if (command == "open")
+			{
+				this->openHandler();
 			}
 			else
 				throw std::exception("Invalid command!\n");
