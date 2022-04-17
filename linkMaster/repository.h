@@ -93,9 +93,13 @@ class HTMLRepository :public Repository
 {
 private:
 	std::string filePath;
+
+	void leftTrim(std::string& str);
+	void rightTrim(std::string& str);
+	std::vector<std::string> htmlTagExtractor(std::string content, std::string tag);
+
 	void readAll();
 	void writeAll();
-	void append(const Tutorial& tutorial);
 public:
 	HTMLRepository(std::string filePath);
 	void add(const Tutorial& tutorial) override;
