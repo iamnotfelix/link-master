@@ -25,10 +25,14 @@ void UserUI::diplayTutorial(const Tutorial& tutorial)
 	int seconds = duration % 60;
 
 	std::cout << std::endl;
-	std::cout << "Title" << "\t" << "Presenter" << "\t" << "Duration" << "\t" << "Likes" << std::endl;
-	std::cout << tutorial.getTitle() << "\t" << tutorial.getPresenter() << "\t"
-		<< minutes << ":" << seconds << "\t" << tutorial.getLikes() << std::endl;
+	std::cout.width(5); std::cout << std::left << "ID";
+	std::cout.width(20); std::cout << std::right << "Title";
+	std::cout.width(20); std::cout << std::right << "Presenter";
+	std::cout.width(10); std::cout << std::right << "Duration";
+	std::cout.width(10); std::cout << std::right << "Likes";
+	std::cout.width(35); std::cout << std::right << "Link";
 	std::cout << std::endl;
+	std::cout << tutorial;
 
 	std::string aux = "start " + tutorial.getLink();
 	char* link = &aux[0];

@@ -19,7 +19,7 @@ bool Tutorial::operator==(const Tutorial& tutorial)
 	return false;
 }
 
-std::ostream& operator<<(std::ostream& os, Tutorial& tutorial)
+std::ostream& operator<<(std::ostream& os, const Tutorial& tutorial)
 {
 	int minutes = tutorial.getDuration() / 60;
 	int seconds = tutorial.getDuration() % 60;
