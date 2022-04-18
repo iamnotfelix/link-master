@@ -67,8 +67,8 @@ void UI::getInput(std::string& title, std::string& presenter, int& duration, int
 			std::cout << "Enter a number!" << std::endl;
 			std::cout << "Minutes: ";
 		}
-		if (minutes >= 0) break;
-		std::cout << "Enter a positive value!" << std::endl;
+		try { this->validation.validateNumber(minutes); break; }
+		catch (const Exception& e) { std::cout << e.what(); }
 	}
 
 	while (true)
@@ -81,8 +81,8 @@ void UI::getInput(std::string& title, std::string& presenter, int& duration, int
 			std::cout << "Enter a number!" << std::endl;
 			std::cout << "Seconds: ";
 		}
-		if (seconds >= 0) break;
-		std::cout << "Enter a positive value!" << std::endl;
+		try { this->validation.validateNumber(seconds); break; }
+		catch (const Exception& e) { std::cout << e.what(); }
 	}
 
 	while (true)
@@ -95,8 +95,8 @@ void UI::getInput(std::string& title, std::string& presenter, int& duration, int
 			std::cout << "Enter a number!" << std::endl;
 			std::cout << "Likes: ";
 		}
-		if (likes >= 0) break;
-		std::cout << "Enter a positive value!" << std::endl;
+		try { this->validation.validateNumber(likes); break; }
+		catch (const Exception& e) { std::cout << e.what(); }
 	}
 
 	std::cout << "Link: ";
@@ -132,8 +132,8 @@ void UI::deleteHandler()
 			std::cout << "Enter a number!" << std::endl;
 			std::cout << "ID: ";
 		}
-		if (id >= 0) break;
-		std::cout << "Enter a positive value!" << std::endl;
+		try { this->validation.validateNumber(id); break; }
+		catch (const Exception& e) { std::cout << e.what(); }
 	}
 
 	this->services.remove(id);
@@ -156,8 +156,8 @@ void UI::updateHandler()
 			std::cout << "Enter a number!" << std::endl;
 			std::cout << "ID: ";
 		}
-		if (id >= 0) break;
-		std::cout << "Enter a positive value!" << std::endl;
+		try { this->validation.validateNumber(id); break; }
+		catch (const Exception& e) { std::cout << e.what(); }
 	}
 
 	std::string title, presenter, link;
