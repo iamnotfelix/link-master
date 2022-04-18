@@ -1,5 +1,6 @@
 
 #include "userServices.h"
+#include "exception.h"
 
 #include<algorithm>
 
@@ -61,7 +62,7 @@ std::string UserServices::getWatchListFilePath()
 	if (HTMLPtr)
 		return HTMLPtr->getFilePath();
 
-	throw std::exception("Cannot open app when using in-memory repository!\n");
+	throw ServicesException("Cannot open app when using in-memory repository!\n");
 }
 
 

@@ -2,6 +2,7 @@
 #include "tests.h"
 #include "repository.h"
 #include "tutorial.h"
+#include "exception.h"
 
 #include <assert.h>
 #include <exception>
@@ -57,9 +58,9 @@ namespace RepositoryTests
 			repo.getElement(2);
 			assert(false);
 		}
-		catch (const std::exception& e)
+		catch (const Exception& e)
 		{
-			assert(strcmp(e.what(), "Tutorial not found!\n") == 0);
+			assert(e.what() == std::string("Tutorial not found!\n"));
 		}
 	}
 	
@@ -104,9 +105,9 @@ namespace RepositoryTests
 			repo.add(tutorial1);
 			assert(false);
 		}
-		catch (const std::exception& e)
+		catch (const Exception& e)
 		{
-			assert(strcmp(e.what(), "Tutorial already exists!\n") == 0);
+			assert(e.what() == std::string("Tutorial already exists!\n"));
 		}
 	}
 	
@@ -132,9 +133,9 @@ namespace RepositoryTests
 			repo.remove(2);
 			assert(false);
 		}
-		catch (const std::exception& e)
+		catch (const Exception& e)
 		{
-			assert(strcmp(e.what(), "Tutorial not found!\n") == 0);
+			assert(e.what() == std::string("Tutorial not found!\n"));
 		}
 	}
 
@@ -149,9 +150,9 @@ namespace RepositoryTests
 			repo.update(0, "title", "presenter", 1, 2, "link");
 			assert(false);
 		}
-		catch (const std::exception& e)
+		catch (const Exception& e)
 		{
-			assert(strcmp(e.what(), "Tutorial not found!\n") == 0);
+			assert(e.what() == std::string("Tutorial not found!\n"));
 		}
 
 		repo.add(tutorial1);

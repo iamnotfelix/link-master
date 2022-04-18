@@ -3,6 +3,7 @@
 #include "repository.h"
 #include "userServices.h"
 #include "services.h"
+#include "exception.h"
 
 #include <assert.h>
 #include <fstream>
@@ -122,7 +123,7 @@ namespace UserServicesTests
 			userServices1.getWatchListFilePath();
 			assert(false);
 		}
-		catch (const std::exception& e)
+		catch (const Exception& e)
 		{
 			assert(e.what() == std::string("Cannot open app when using in-memory repository!\n"));
 		}

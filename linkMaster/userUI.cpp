@@ -1,5 +1,6 @@
 
 #include "userUI.h"
+#include "exception.h"
 
 #include <iostream>
 
@@ -65,7 +66,7 @@ void UserUI::actionHandler(const Tutorial& tutorial)
 		else if (action == "next")
 			break;
 		else if (action == "quit")
-			throw std::exception("Quitted successfully!\n");
+			throw UIException("Quitted successfully!\n");
 		else
 			std::cout << "Invalid action!" << std::endl;
 	}
@@ -84,7 +85,7 @@ void UserUI::tutorialsHandler()
 	std::vector<Tutorial>  tutorials = this->userServices.getTutorialsByPresenter(presenter);
 	
 	if (tutorials.size() == 0)
-		throw std::exception("No matching tutorials!\n");
+		throw UIException("No matching tutorials!\n");
 
 	int i = 0;
 	while (true)
@@ -127,7 +128,7 @@ bool UserUI::watchHandler(const Tutorial& tutorial)
 		else if (action == "next")
 			return false;
 		else if (action == "quit")
-			throw std::exception("Quitted successfully!\n");
+			throw UIException("Quitted successfully!\n");
 		else
 			std::cout << "Invalid action!" << std::endl;
 	}
@@ -137,7 +138,7 @@ bool UserUI::watchHandler(const Tutorial& tutorial)
 void UserUI::watchListHandler()
 {
 	if (this->userServices.getWatchListSize() == 0)
-		throw std::exception("Watch list is empty!\n");
+		throw UIException("Watch list is empty!\n");
 	
 	int i = 0;
 	while (true && this->userServices.getWatchListSize() != 0)
@@ -154,7 +155,7 @@ void UserUI::watchListHandler()
 		if (i >= this->userServices.getWatchListSize())
 			i = 0;
 	}
-	throw std::exception("Watch list is empty!\n");
+	throw UIException("Watch list is empty!\n");
 }
 
 void UserUI::openHandler()
@@ -195,9 +196,9 @@ void UserUI::commandHandler()
 				this->openHandler();
 			}
 			else
-				throw std::exception("Invalid command!\n");
+				throw UIException("Invalid command!\n");
 		}
-		catch (std::exception& e)
+		catch (const Exception& e)
 		{
 			std::cin.clear();
 			std::cin.ignore(10000, '\n');

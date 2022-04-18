@@ -1,5 +1,6 @@
 
 #include "ui.h"
+#include "exception.h"
 
 #include <iostream>
 #include <stdlib.h>
@@ -22,7 +23,7 @@ void UI::printMenu()
 void UI::printList(std::vector<Tutorial>& list)
 {
 	if (list.size() == 0)
-		throw std::exception("There is nothing to print!\n");
+		throw UIException("There is nothing to print!\n");
 
 	std::cout << "ID\tTitle\tPresenter\tDuration\tLikes\tLink\n";
 
@@ -212,10 +213,10 @@ void UI::commandHandler()
 			}
 			else
 			{
-				throw std::exception("Invalid command!\n");
+				throw UIException("Invalid command!\n");
 			}
 		}
-		catch (std::exception& e)
+		catch (const Exception& e)
 		{
 			std::cin.clear();
 			std::cin.ignore(100000, '\n');

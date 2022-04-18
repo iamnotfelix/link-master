@@ -1,5 +1,6 @@
 
 #include "repository.h"
+#include "exception.h"
 
 #include <exception>
 #include <string>
@@ -26,7 +27,7 @@ int Repository::getPosition(const unsigned int id)
 		if (this->vector[i].getId() == id)
 			return i;
 
-	throw std::exception("Tutorial not found!\n");
+	throw RepositoryException("Tutorial not found!\n");
 }
 
 Tutorial Repository::getElement(const unsigned int id)
@@ -44,7 +45,7 @@ std::vector<Tutorial> Repository::getAll()
 void Repository::add(const Tutorial& tutorial)
 {
 	if (this->find(tutorial))
-		throw std::exception("Tutorial already exists!\n");
+		throw RepositoryException("Tutorial already exists!\n");
 
 	this->vector.push_back(tutorial);
 }
