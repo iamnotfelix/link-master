@@ -1,6 +1,7 @@
 
 #include "tests.h"
 #include "exception.h"
+#include "validation.h"
 
 #include <assert.h>
 
@@ -15,6 +16,7 @@ void testException()
 	try
 	{
 		throw re;
+		assert(false);
 	}
 	catch (const Exception& e)
 	{
@@ -24,6 +26,7 @@ void testException()
 	try
 	{
 		throw ve;
+		assert(false);
 	}
 	catch (const Exception& e)
 	{
@@ -33,6 +36,7 @@ void testException()
 	try
 	{
 		throw se;
+		assert(false);
 	}
 	catch (const Exception& e)
 	{
@@ -42,9 +46,22 @@ void testException()
 	try
 	{
 		throw ue;
+		assert(false);
 	}
 	catch (const Exception& e)
 	{
 		assert(e.what() == "uiException");
+	}
+
+	try
+	{
+		Validation v;
+		v.validateNumber(0);
+		v.validateNumber(-1);
+		assert(false);
+	}
+	catch (const Exception& e)
+	{
+		assert(e.what() == "Enter a positive value!\n");
 	}
 }
