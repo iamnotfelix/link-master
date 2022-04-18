@@ -25,17 +25,17 @@ void UI::printList(std::vector<Tutorial>& list)
 	if (list.size() == 0)
 		throw UIException("There is nothing to print!\n");
 
-	std::cout << "ID\tTitle\tPresenter\tDuration\tLikes\tLink\n";
+	std::cout.width(5); std::cout << std::left << "ID";
+	std::cout.width(20); std::cout << std::right << "Title";
+	std::cout.width(20); std::cout << std::right << "Presenter";
+	std::cout.width(10); std::cout << std::right << "Duration";
+	std::cout.width(10); std::cout << std::right << "Likes";
+	std::cout.width(35); std::cout << std::right << "Link";
+	std::cout << std::endl;
 
 	for (auto tutorial : list)
 	{
-		int duration = tutorial.getDuration();
-		int minutes = duration / 60;
-		int seconds = duration % 60;
-
-		std::cout << tutorial.getId() << "\t" << tutorial.getTitle() << "\t" << tutorial.getPresenter() << "\t"
-			<< minutes << ":" << seconds << "\t" << tutorial.getLikes() << "\t"
-			<< tutorial.getLink() << std::endl;
+		std::cout << tutorial;
 	}
 }
 

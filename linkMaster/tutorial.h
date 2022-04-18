@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
 class Tutorial
 {
@@ -31,4 +32,7 @@ public:
 
 	//Equal equal operator overloaded for comparing tutorial objects.
 	bool operator==(const Tutorial& tutorial);
+
+	friend std::ostream& operator<<(std::ostream& os, Tutorial& tutorial);
+	//friend std::istream& operator>>(std::istream& is, Tutorial& tutorial);
 };
