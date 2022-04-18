@@ -6,3 +6,4 @@ void testTutorial();
 void testRepository();
 void testServices();
 void testUserServices();
+void testException();
