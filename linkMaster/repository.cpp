@@ -343,3 +343,78 @@ void HTMLRepository::update(const unsigned int id, std::string title, std::strin
 	Repository::update(id, title, presenter, duration, likes, link);
 	this->writeAll();
 }
+
+
+
+
+
+void SQLRepository::readAll()
+{
+	using namespace mysqlx;
+
+	Session sess(this->host, this->port, this->user, this->password);
+	Schema db = sess.getSchema(this->database);
+	Table tab = db.getTable(this->table);
+	RowResult rows = tab.select("*").execute();
+
+	while (Row r = rows.fetchOne())
+	{
+		Tutorial tutorial((int)r[0], (std::string)r[1], (std::string)r[2], (int)r[3], (int)r[4], (std::string)r[5]);
+		this->vector.push_back(tutorial);
+		this->idCount = (int)r[0] + 1;
+	}
+
+	sess.close();
+}
+
+SQLRepository::SQLRepository(std::string host, int port, std::string user, std::string password, std::string database, std::string table)
+	: host{ host }, port{ port }, user{ user }, password{ password }, database{ database }, table{ table } 
+{
+	this->readAll();
+}
+
+void SQLRepository::add(const Tutorial& tutorial)
+{
+	Repository::add(tutorial);
+
+	using namespace mysqlx;
+	Session sess(this->host, this->port, this->user, this->password);
+	Schema db = sess.getSchema(this->database);
+	Table tab = db.getTable(this->table);
+
+	tab.insert("id", "title", "presenter", "duration", "likes", "link")
+		.values(tutorial.getId(), tutorial.getTitle(), tutorial.getPresenter(), 
+			tutorial.getDuration(), tutorial.getLikes(), tutorial.getLink()).execute();
+
+	sess.close();
+}
+
+void SQLRepository::remove(const unsigned int id)
+{
+	Repository::remove(id);
+
+	using namespace mysqlx;
+	Session sess(this->host, this->port, this->user, this->password);
+	Schema db = sess.getSchema(this->database);
+	Table tab = db.getTable(this->table);
+
+	tab.remove().where("id = :param").limit(1).bind("param", id).execute();
+
+	sess.close();
+}
+
+void SQLRepository::update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link)
+{
+	Repository::update(id, title, presenter, duration, likes, link);
+
+	using namespace mysqlx;
+	Session sess(this->host, this->port, this->user, this->password);
+	Schema db = sess.getSchema(this->database);
+	Table tab = db.getTable(this->table);
+
+	tab.update()
+		.set("title", title).set("presenter", presenter).set("duration", duration).set("likes", likes).set("link", link)
+		.where("id = :param").limit(1).bind("param", id).execute();
+
+	sess.close();
+}

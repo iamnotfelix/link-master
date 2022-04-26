@@ -3,6 +3,8 @@
 #include <vector>
 #include "tutorial.h"
 
+#include <mysqlx/xdevapi.h>
+
 
 class Repository
 {
@@ -111,4 +113,24 @@ public:
 	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
 
 	inline std::string getFilePath() { return this->filePath; };
+};
+
+
+class SQLRepository :public Repository
+{
+private:
+	std::string host;
+	int port;
+	std::string user;
+	std::string password;
+	std::string database;
+	std::string table;
+
+	void readAll();
+
+public:
+	SQLRepository(std::string host, int port, std::string user, std::string password, std::string database, std::string table);
+	void add(const Tutorial& tutorial) override;
+	void remove(const unsigned int id) override;
+	void update(const unsigned int id, std::string title, std::string presenter, int duration, int likes, std::string link) override;
 };
