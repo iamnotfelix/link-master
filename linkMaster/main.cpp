@@ -6,6 +6,8 @@
 #include <iostream>
 #include <crtdbg.h>
 
+#include <mysqlx/xdevapi.h>
+
 
 void printMenuRepositories()
 {
@@ -15,6 +17,7 @@ void printMenuRepositories()
 	std::cout << "txt\tRepository stored in TXT files." << std::endl;
 	std::cout << "csv\tRepository stored in CSV files." << std::endl;
 	std::cout << "html\tRepository stored in HTML files." << std::endl;
+	std::cout << "sql\tRepository stored in MySQL database." << std::endl;
 	std::cout << "exit\tExit the application." << std::endl;
 }
 
@@ -123,6 +126,20 @@ void start()
 			commandHandler(ui, userUI);
 			printMenuRepositories();
 		}
+		else if (command == "sql")
+		{
+			SQLRepository repo{ "localhost", 33060, "root", "root", "link_master", "tutorials" };
+			TutorialServices services{ repo };
+
+			SQLRepository watchList{ "localhost", 33060, "root", "root", "link_master", "watch_list" };
+			UserServices userServices{ repo, watchList };
+
+			UI ui{ services };
+			UserUI userUI{ userServices };
+
+			commandHandler(ui, userUI);
+			printMenuRepositories();
+		}
 		else
 			std::cout << "Invalid command!" << std::endl;
 	}
@@ -135,6 +152,7 @@ void tests()
 	testRepository();
 	testServices();
 	testUserServices();
+	testException();
 }
 
 int main()
