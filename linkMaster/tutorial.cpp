@@ -30,7 +30,7 @@ std::ostream& operator<<(std::ostream& os, const Tutorial& tutorial)
 	os.width(20); os << std::right << tutorial.getPresenter();
 	os.width(10); os << std::right << time;
 	os.width(10); os << std::right << tutorial.getLikes();
-	os.width(35); os << std::right << tutorial.getLink();
+	os.width(60); os << std::right << tutorial.getLink();
 	os << std::endl;
 
 	return os;

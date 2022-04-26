@@ -125,7 +125,7 @@ namespace UserServicesTests
 		}
 		catch (const Exception& e)
 		{
-			assert(e.what() == std::string("Cannot open app when using in-memory repository!\n"));
+			assert(e.what() == std::string("Cannot open app when using in-memory or MySQL repository!\n"));
 		}
 
 		TXTRepository repo2("testFile.txt");

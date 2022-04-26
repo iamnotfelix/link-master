@@ -30,7 +30,7 @@ void UserUI::diplayTutorial(const Tutorial& tutorial)
 	std::cout.width(20); std::cout << std::right << "Presenter";
 	std::cout.width(10); std::cout << std::right << "Duration";
 	std::cout.width(10); std::cout << std::right << "Likes";
-	std::cout.width(35); std::cout << std::right << "Link";
+	std::cout.width(60); std::cout << std::right << "Link";
 	std::cout << std::endl;
 	std::cout << tutorial;
 
