@@ -7,6 +7,7 @@
 #include <assert.h>
 #include <exception>
 #include <fstream>
+#include <mysqlx/xdevapi.h>
 
 
 namespace RepositoryTests
@@ -363,6 +364,81 @@ namespace HTMLRepositoryTests
 	}
 }
 
+namespace SQLRepositoryTests
+{
+	void clearTestTable()
+	{
+		using namespace mysqlx;
+
+		Session sess("localhost", 33060, "root", "root");
+		sess.sql("USE link_master").execute();
+		sess.sql("DELETE FROM test_table").execute();
+		sess.close();
+	}
+
+	void testAdd()
+	{
+		clearTestTable();
+
+		using namespace mysqlx;
+		Session sess("localhost", 33060, "root", "root");
+		sess.sql("USE link_master").execute();
+		sess.sql("INSERT INTO test_table (id, title, presenter, duration, likes, link) VALUES (0, 'a', 'b', 0, 0, 'c')")
+			.execute();
+		sess.close();
+
+		SQLRepository repo{ "localhost", 33060, "root", "root", "link_master", "test_table" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
+
+		repo.add(tutorial1);
+		assert(repo.getSize() == 2);
+
+		repo.add(tutorial2);
+		assert(repo.getSize() == 3);
+
+		repo.add(tutorial3);
+		assert(repo.getSize() == 4);
+	}
+
+	void testRemove()
+	{
+		clearTestTable();
+		SQLRepository repo{ "localhost", 33060, "root", "root", "link_master", "test_table" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+		Tutorial tutorial2(repo.getNextId(), "title2", "presenter2", 1, 2, "link2");
+		Tutorial tutorial3(repo.getNextId(), "title3", "presenter3", 1, 2, "link3");
+
+		repo.add(tutorial1);
+		repo.add(tutorial2);
+
+		assert(repo.getSize() == 2);
+		repo.remove(0);
+		assert(repo.getSize() == 1);
+		repo.remove(1);
+		assert(repo.getSize() == 0);
+	}
+
+	void testUpdate()
+	{
+		clearTestTable();
+		SQLRepository repo{ "localhost", 33060, "root", "root", "link_master", "test_table" };
+
+		Tutorial tutorial1(repo.getNextId(), "title1", "presenter1", 1, 2, "link1");
+
+		repo.add(tutorial1);
+
+		repo.update(0, "title4", "presenter4", 1, 2, "link4");
+		assert(repo.getElement(0).getTitle() == "title4");
+
+		repo.update(0, "title5", "presenter5", 1, 2, "link5");
+		assert(repo.getElement(0).getPresenter() == "presenter5");
+	}
+}
+
 void testRepository()
 {
 	//RepositoryTests::testConstructor();
@@ -384,4 +460,8 @@ void testRepository()
 	HTMLRepositoryTests::testAdd();
 	HTMLRepositoryTests::testRemove();
 	HTMLRepositoryTests::testUpdate();
+
+	SQLRepositoryTests::testAdd();
+	SQLRepositoryTests::testRemove();
+	SQLRepositoryTests::testUpdate();
 }
